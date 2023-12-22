@@ -1,51 +1,127 @@
 let x = 200;
 let y = 400;
 let KeyIsPressed = false;
+// Draw Functions
+window.addEventListener("load", draw);
 
 let cnv = document.getElementById("myCanvas");
 let ctx = cnv.getContext("2d");
 cnv.width = 800;
 cnv.height = 600;
 
-// Setup the canvvas and the graphic context
-requestAnimationFrame(draw);
-function draw() {
-  // UPDATE ELEMENT ON CANVAS
+// Global Variables
+let player = {
+  x: 400,
+  y: 300,
+  w: 25,
+  h: 25,
+  speed: 5,
+  color: "blue",
+};
 
-  // Animate if any key is held down
-  if (KeyIsPressed) {
-    if (KeyDown == LEFT_ARROW) {
-      x--;
-    } else if (KeyDown == RIGHT_ARROW) {
-      x++;
-    }
-    if (Keydown == UP_ARROW) {
-      y--;
-    } else if (KeyDown == DOWN_ARROW) {
-      y++;
-    }
+let leftPressed = false;
+let rightPressed = false;
+let upPressed = false;
+let downPressed = false;
+
+let player2 = {
+  x: 800,
+  y: 600,
+  w: 50,
+  h: 50,
+  speed: 5,
+  color: "green",
+};
+
+let wPressed = false;
+let aPressed = false;
+let sPressed = false;
+let dPressed = false;
+
+function draw() {
+  // Logic
+  if (rightPressed) {
+    player.x += player.speed;
+  } else if (leftPressed) {
+    player.x += -player.speed;
+  } else if (upPressed) {
+    player.y += -player.speed;
+  } else if (downPressed) {
+    player.y += player.speed;
+  }
+
+  if (dPressed) {
+    player2.x += player2.speed;
+  } else if (aPressed) {
+    player2.x += -player2.speed;
+  } else if (wPressed) {
+    player2.y += -player2.speed;
+  } else if (sPressed) {
+    player2.y += player2.speed;
   }
 
   // Draw Canvas
   ctx.fillStyle = "white";
-  ctx.fillRect(x, y, 50, 50);
+  ctx.fillRect(0, 0, cnv.width, cnv.height);
 
-  ctx.fillStyle = "blue";
-  ctx.fillRect(x, 50, 50, 50);
+  // Draw Player
+  ctx.fillStyle = player.color;
+  ctx.fillRect(player.x, player.y, player.w, player.h);
 
-  ctx.fillStyle = "green";
-  ctx.fillRect(y, 50, 50, 50);
+  // Event Stuff
+  document.addEventListener("keydown", keydownHandler);
 
-  // REQUEST ANIMATION FRAME
-  requestAnimationFrame(draw);
-}
+  function keydownHandler(e) {
+    console.log(e.code);
+    if (e.code === "ArrowLeft") {
+      leftPressed = true;
+    } else if (e.code === "ArrowRight") {
+      rightPressed = true;
+    } else if (e.code === "ArrowUp") {
+      upPressed = true;
+    } else if (e.code === "ArrowDown") {
+      downPressed = true;
+    }
+  }
+  function keydownHandler(e) {
+    console.log(e.code);
+    if (e.code === "KeyW") {
+      wPressed = true;
+    } else if (e.code === "KeyA") {
+      aPressed = true;
+    } else if (e.code === "KeyS") {
+      sPressed = true;
+    } else if (e.code === "KeyD") {
+      dPressed = true;
+    }
+  }
 
-document.addEventListener("KeyDown", keydownHandler);
-document.addEventListener("KeyUp", KeyUpHandler);
+  document.addEventListener("keyup", keyupHandler);
 
-function keydownHandler() {
-  KeyIsPressed = true;
-}
-function KeyUpHandler() {
-  KeyIsPressed = false;
+  function keyupHandler(e) {
+    console.log(e.code);
+    if (e.code === "ArrowLeft") {
+      leftPressed = false;
+    } else if (e.code === "ArrowRight") {
+      rightPressed = false;
+    } else if (e.code === "ArrowUp") {
+      upPressed = false;
+    } else if (e.code === "ArrowDown") {
+      downPressed = false;
+    }
+  }
+  document.addEventListener("keyup", keyupHandler);
+
+  function keyupHandler(e) {
+    console.log(e.code);
+    if (e.code === "KeyW") {
+      wPressed = false;
+    } else if (e.code === "KeyA") {
+      aPressed = false;
+    } else if (e.code === "KeyS") {
+      sPressed = false;
+    } else if (e.code === "KeyD") {
+      dPressed = false;
+    }
+  }
 }
