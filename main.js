@@ -51,13 +51,13 @@ function draw() {
   }
 
   if (dPressed) {
-    player.x += player.speed;
+    player2.x += player2.speed;
   } else if (aPressed) {
-    player.x += -player.speed;
+    player2.x += -player2.speed;
   } else if (wPressed) {
-    player.y += -player.speed;
-  } else if (downPressed) {
-    player.y += player.speed;
+    player2.y += -player2.speed;
+  } else if (sPressed) {
+    player2.y += player2.speed;
   }
 
   // Drawing
@@ -89,20 +89,14 @@ function keydownHandler(e) {
     upPressed = true;
   } else if (e.code === "ArrowDown") {
     downPressed = true;
-  }
-
-  document.addEventListener("keydown", keydownHandler);
-  function keydownHandler(e) {
-    console.log(e.code);
-    if (e.code === "keya") {
-      aPressed = true;
-    } else if (e.code === "keyd") {
-      dPressed = true;
-    } else if (e.code === "keyw") {
-      wPressed = true;
-    } else if (e.code === "keys") {
-      sPressed = true;
-    }
+  } else if (e.code === "KeyA") {
+    aPressed = true;
+  } else if (e.code === "KeyD") {
+    dPressed = true;
+  } else if (e.code === "KeyW") {
+    wPressed = true;
+  } else if (e.code === "KeyS") {
+    sPressed = true;
   }
 }
 
@@ -118,19 +112,13 @@ function keyupHandler(e) {
     upPressed = false;
   } else if (e.code === "ArrowDown") {
     downPressed = false;
-  }
-
-  document.addEventListener("keyup", keyupHandler);
-  function keyupHandler(e) {
-    if (e.code === "keya") {
-      aPressed = false;
-    } else if (e.code === "keyd") {
-      dPressed = false;
-    } else if (e.code === "keyw") {
-      wPressed = false;
-    } else if (e.code === "keys") {
-      sPressed = false;
-    }
+  } else if (e.code === "KeyA") {
+    aPressed = false;
+  } else if (e.code === "KeyD") {
+    dPressed = false;
+  } else if (e.code === "KeyW") {
+    wPressed = false;
+  } else if (e.code === "KeyS") {
+    sPressed = false;
   }
 }
-
